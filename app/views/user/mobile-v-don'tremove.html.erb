@@ -1,0 +1,41 @@
+      <div class="main">
+      <!--Mobile Menu-->
+        <div class="visible-xs">
+            <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <div id="BtnMobilMenu" class="navbar-header text-center">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                </div>
+                
+                <!-- 로그인한 사용자 정보 -->
+                <div class="list-group-item">
+                  <address>
+                      <strong>Your Name</strong><br>
+                      <a href="mailto:#"><%=current_user.email%></a>
+                  </address>
+                  
+                  <address>
+                      <strong><%= current_user.school %></strong><br>
+                      <abbr title="Phone">P:</abbr> 정답률 : 어쩌구 
+                  </address>
+                </div>
+                <!-- /로그인한 사용자 정보 -->
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav js-filters-juicy-projects">
+                    <li class="cbp-singlePage list-group-item text-center hvr-underline-from-center text-uppercase"><a href="about-me.html" class="cbp-singlePage list-group-item hvr-underline-from-left text-uppercase" data-cbp-singlePage="myCustomSinglePage1">My Page</a></li>
+                    <li class="cbp-singlePage list-group-item text-center hvr-underline-from-center text-uppercase"><a href="/subjects/subject_list"class=" list-group-item hvr-underline-from-left text-uppercase">내용 정리</a></li>
+                    <li class="cbp-singlePage list-group-item text-center hvr-underline-from-center text-uppercase"><a href="/subjects/subject_list"class=" list-group-item hvr-underline-from-left text-uppercase">문제 풀기</a></li>
+                    <li data-filter=".movie" class="cbp-filter-item list-group-item text-center hvr-underline-from-center text-uppercase"> 모든 내용 </li>
+                  </ul>
+                </div>
+                
+              </div>
+            </nav>
+        </div>
+        <!-- /Mobile Menu-->

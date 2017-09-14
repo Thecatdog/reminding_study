@@ -1,0 +1,900 @@
+@charset "utf-8";
+
+/* Bootstrap customize and private css  */
+
+/*------------------------------------------------------------------
+[Table of contents]
+
+1. Html / Body
+2. Footer / Social Media Icons
+3. Address / Google Maps / Bootstrap Modal / IFRAME
+4. Menu / Mobile Menu 
+5. Portfolio Content and Customizations / Single Page
+6. Responsive Navigation
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+[1. Html / Body]
+*/
+
+html {
+    position: relative;
+    min-height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 16px;
+    margin-bottom: 60px;
+    background: #f4f4f4;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/*------------------------------------------------------------------
+[2. Footer / Social Media Icons]
+*/
+
+.footer {
+    position: absolute;
+    width: 100%;
+    padding: 19px 0px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    bottom: 0;
+}
+
+.footer-small {
+	color: #555;
+    display: block;
+    margin: 10px;
+    margin-left: 25px;
+    font-size: 16px;
+}
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.social-icons {
+    float: right;
+    padding: 0!important;
+    list-style-type: none!important;
+    margin: 1px 22px 0 auto;
+}
+
+.social-icons ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+.social-icons li {
+    float: left!important;
+    margin-right: 2px!important;
+    margin-bottom: 0px!important;
+    padding: 0px!important;
+    display: inline!important;
+    width: auto!important;
+}
+
+.social-icons li a {
+    transition: all 0.3s ease 0s;
+    display: block!important;
+    float: left!important;
+    height: 100%!important;
+    margin: 0!important;
+    padding: 0!important;
+    width: 40px!important;
+    height: 40px!important;
+    text-indent: -9999px!important;
+}
+
+.social-icons li a:hover {
+    background-position: 0 -40px!important;
+}
+
+.social-icons li a {
+    background-color: transparent;
+}
+
+.social-icons li.aim a {
+    background: url(../images/icons/aim.png) no-repeat 0 0;
+}
+
+.social-icons li.aim a:hover {
+    background-color: #e95a00;
+}
+
+.social-icons li.apple a {
+    background: url(../images/icons/apple.png) no-repeat 0 0;
+}
+
+.social-icons li.apple a:hover {
+    background-color: #606060;
+}
+
+.social-icons li.behance a {
+    background: url(../images/icons/behance.png) no-repeat 0 0;
+}
+
+.social-icons li.behance a:hover {
+    background-color: #18a3fe;
+}
+
+.social-icons li.blogger a {
+    background: url(../images/icons/blogger.png) no-repeat 0 0;
+}
+
+.social-icons li.blogger a:hover {
+    background-color: #fb913f;
+}
+
+.social-icons li.cargo a {
+    background: url(../images/icons/cargo.png) no-repeat 0 0;
+}
+
+.social-icons li.delicious a {
+    background: url(../images/icons/delicious.png) no-repeat 0 0;
+}
+
+.social-icons li.facebook a {
+    background: url(../images/icons/facebook.png) no-repeat 0 0;
+}
+
+.social-icons li.facebook a:hover {
+    background-color: #3b5998;
+}
+
+.social-icons li.flickr a {
+    background: url(../images/icons/flickr.png) no-repeat 0 0;
+}
+
+.social-icons li.flickr a:hover {
+    background-color: #f1628b;
+}
+
+.social-icons li.google a {
+    background: url(../images/icons/google.png) no-repeat 0 0;
+}
+
+.social-icons li.google a:hover {
+    background-color: #dd4b39;
+}
+
+.social-icons li.googleplus a {
+    background: url(../images/icons/googleplus.png) no-repeat 0 0;
+}
+
+.social-icons li.googleplus a:hover {
+    background-color: #d94a39;
+}
+
+.social-icons li.html5 a {
+    background: url(../images/icons/html5.png) no-repeat 0 0;
+}
+
+.social-icons li.html5 a:hover {
+    background-color: #f3642c;
+}
+
+.social-icons li.linkedin a {
+    background: url(../images/icons/linkedin.png) no-repeat 0 0;
+}
+
+.social-icons li.linkedin a:hover {
+    background-color: #71b2d0;
+}
+
+.social-icons li.orkut a {
+    background: url(../images/icons/orkut.png) no-repeat 0 0;
+}
+
+.social-icons li.orkut a:hover {
+    background-color: #ed2590;
+}
+
+.social-icons li.paypal a {
+    background: url(../images/icons/paypal.png) no-repeat 0 0;
+}
+
+.social-icons li.paypal a:hover {
+    background-color: #32689a;
+}
+
+.social-icons li.picasa a {
+    background: url(../images/icons/picasa.png) no-repeat 0 0;
+}
+
+.social-icons li.picasa a:hover {
+    background-color: #444;
+}
+
+.social-icons li.pinterest a {
+    background: url(../images/icons/pinterest.png) no-repeat 0 0;
+}
+
+.social-icons li.pinterest a:hover {
+    background-color: #cb2027;
+}
+
+.social-icons li.rss a {
+    background: url(../images/icons/rss.png) no-repeat 0 0;
+}
+
+.social-icons li.rss a:hover {
+    background-color: #fe9900;
+}
+
+.social-icons li.skype a {
+    background: url(../images/icons/skype.png) no-repeat 0 0;
+}
+
+.social-icons li.skype a:hover {
+    background-color: #18b7f1;
+}
+
+.social-icons li.tumblr a {
+    background: url(../images/icons/tumblr.png) no-repeat 0 0;
+}
+
+.social-icons li.tumblr a:hover {
+    background-color: #3a5976;
+}
+
+.social-icons li.twitter a {
+    background: url(../images/icons/twitter.png) no-repeat 0 0;
+}
+
+.social-icons li.twitter a:hover {
+    background-color: #48c4d2;
+}
+
+.social-icons li.vimeo a {
+    background: url(../images/icons/vimeo.png) no-repeat 0 0;
+}
+
+.social-icons li.vimeo a:hover {
+    background-color: #62a0ad;
+}
+
+.social-icons li.wordpress a {
+    background: url(../images/icons/wordpress.png) no-repeat 0 0;
+}
+
+.social-icons li.wordpress a:hover {
+    background-color: #464646;
+}
+
+.social-icons li.yelp a {
+    background: url(../images/icons/yelp.png) no-repeat 0 0;
+}
+
+.social-icons li.yelp a:hover {
+    background-color: #c41200;
+}
+
+.social-icons li.youtube a {
+    background: url(../images/icons/youtube.png) no-repeat 0 0;
+}
+
+.social-icons li.youtube a:hover {
+    background-color: #f45750;
+}
+
+/*------------------------------------------------------------------
+[3. Address / Google Maps / Bootstrap Modal / IFRAME]
+*/
+
+iframe {
+    width: 100%;
+}
+
+.modal-header {
+    font-size: 16px;
+}
+
+.modal-content {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 0px;
+}
+
+.modal-body {
+    padding: 0px;
+}
+
+address {
+	color: #666;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+address strong {
+	color: #1f1f1f;
+}
+
+address a {
+	color: #666;
+    text-decoration: none;
+    transition: .3s;
+}
+
+address a:hover {
+	color: #000;
+    text-decoration: none;
+}
+
+address a i {
+	color: #1f1f1f;
+	font-size: 16px;
+	transition: .3s;
+}
+
+address a i:hover {
+	color: #000;
+}
+
+/*------------------------------------------------------------------
+[4. Menu / Mobile Menu ]
+*/
+
+.list-group a:hover {
+    background: none;
+}
+
+.list-group-item {
+    background: transparent;
+    border: 0px;
+    font-size: 14px;
+    color: #666;
+    transition: .3s;
+}
+
+.list-group-item:hover {
+	color: #000;
+}
+
+.menu {
+    width: 195px;
+    float: none;
+    margin-left: 20px;
+    margin-right: 33px;
+}
+
+.cbp-filter-item {
+    cursor: pointer;
+}
+
+.hvr-underline-from-left {
+    display: block;
+    -webkit-transform: none;
+    transform: none;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+}
+
+.hvr-underline-from-left:before {
+    background: red;
+    height: 1px;
+    bottom: 2px;
+    transition: 0.4s cubic-bezier(1, 0, 0, 1);
+    transition-delay: .1s;
+}
+
+.hvr-underline-from-center:before {
+	background: #1f1f1f;
+	height: 2px;
+	right: 51%;
+}
+
+li.hvr-underline-from-center:before {
+    height: 1px;
+}
+
+.list-group .logo {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+a.list-group-item {
+    color: #666;
+    transition: .3s;
+}
+
+a.list-group-item:hover {
+    color: #000;
+}
+
+a.list-group-item:focus {
+    background: transparent;
+}
+
+a:focus {
+    outline: none;
+}
+
+/*Mobile Menu*/
+
+.navbar-default .navbar-nav>li>a {
+    color: #1f1f1f;
+}
+
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
+    background-color: transparent;
+}
+
+.navbar-toggle {
+    position: absolute;
+    float: none;
+    right: 0;
+    padding: 7px 10px 9px 10px;
+    margin: 0;
+    background-color: transparent;
+    background-image: none;
+    border: 0;
+}
+
+.navbar-collapse {
+    margin-top: 31px;
+}
+
+.navbar-collapse .navbar-nav {
+    margin: 20px -15px;
+}
+
+.navbar-default {
+    background-color: transparent;
+    border: 0;
+}
+
+.navbar-nav>li>a {
+    padding: 0px;
+}
+
+.nav>li>a {
+    padding: 0px
+}
+
+.navbar-header img {
+    cursor: pointer;
+}
+
+/*------------------------------------------------------------------
+[5. Portfolio Content and Customizations / Single Page ]
+*/
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
+.cbp-caption-activeWrap {
+    background: #494949;
+}
+
+.portfolio-content .cbp-l-project-desc-title span,
+.portfolio-content .cbp-l-project-details-title span {
+    border-bottom-color: #1f1f1f;
+}
+
+.cbp-item .btn-group {
+    width: 100%;
+}
+
+.cbp-item .btn {
+    width: 50%;
+    color: #fff;
+    padding: 0;
+    border: 0;
+    margin: 0;
+    transition: background .35s, color .2s;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    border-radius: 0;
+    background: transparent;
+    height: 47px;
+    line-height: 46px;
+    font-weight:bold;
+}
+
+.cbp-item .btn:hover {
+    background: #313131;
+    color: #dfdfdf;
+}
+
+.cbp-l-project-details .btn.focus,
+.cbp-l-project-details .btn:focus,
+.cbp-l-project-details .btn:hover {
+    color: #fff;
+}
+
+.cbp-item .btn-right {
+    border-left: 1px solid #313131 !important;
+}
+
+.btn-group-sm>.btn, .btn-sm {
+    border-radius: 0;
+}
+
+.btn-group .btn+.btn,
+.btn-group .btn+.btn-group,
+.btn-group .btn-group+.btn,
+.btn-group .btn-group+.btn-group {
+    margin-left: 0;
+}
+
+.cbp {
+    margin-right: 10px;
+}
+
+.cbp-item-wrapper {
+    padding: 5px 15px 30px 5px;
+}
+
+.cbp-slider .cbp-item-wrapper {
+    padding: 0;
+}
+
+.cbp-slider.cbp {
+    margin-right: 0;
+} 
+
+.cbp-item-wrap {
+    background: #fff;
+    transition: box-shadow .35s ease-out, transform .3s ease-out, opacity .2s ease-out;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.cbp-item-wrap:hover {
+    box-shadow: 0 15px 20px rgba(0,0,0,0.2);
+    transform: translate(0, -4px);
+    opacity: 1 !important;
+}
+
+.cbp .cbp-item {
+    overflow: visible;
+}
+
+.cbp-popup-singlePage-counter {
+    font: 400 14px/30px "Open Sans Condensed",sans-serif;
+}
+
+.cbp-l-project-details .btn {
+    font: 400 12px/17px "Open Sans Condensed", sans-serif;
+    padding: 7px 15px;
+    border-radius: 0;
+    background: #1f1f1f;
+    transition: .3s;
+}
+
+.cbp-l-project-details .btn:hover {
+    color: #fff;
+    background: #222;
+}
+
+.cbp-l-project-title,
+.cbp-l-project-desc-title,
+.cbp-l-project-related-title,
+.cbp-l-grid-projects-title,
+.cbp-l-grid-projects-desc {
+    color: #1f1f1f;
+}
+
+.cbp-l-project-related-link {
+    transition: .1s;
+}
+
+.cbp-popup-singlePage .cbp-popup-navigation-wrap {
+    background-color: #1f1f1f;
+}
+
+.cbp-l-project-details-list strong {
+    color: #555;
+}
+
+.cbp-l-project-subtitle {
+    font: 400 16px/21px 'Open Sans Condensed', sans-serif;
+}
+
+.cbp-l-project-desc-title span,
+.cbp-l-project-details-title span {
+    border-bottom: 2px solid #333;
+}
+
+.cbp-l-grid-projects-desc {
+    height: 34px;
+}
+
+.cbp-l-loadMore-button {
+    visibility: hidden;
+    opacity: 0;
+    transition:visibility 0s linear 0.5s,opacity 0.5s linear;
+}
+
+.cbp-l-loadMore-button .cbp-l-loadMore-button-link,
+.cbp-l-loadMore-button .cbp-l-loadMore-link {
+    margin-top: 15px;
+}
+
+/*------------------------------------------------------------------
+[6. Responsive Navigation ]
+*/
+
+@media screen and (max-width: 767px) {
+
+	.navbar {
+		margin-top: 20px;
+		margin-bottom: 0;
+        padding: 0 10px;
+	}
+
+	.main {
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+
+    .cbp {
+        margin-right: 0;
+    }
+
+	.portfolio-content .cbp-l-loadMore-button {
+		margin-bottom: 0;
+	}
+
+    .cbp-item-wrapper {
+        padding-right: 0;
+    }
+
+	.footer {
+		position: relative;
+		bottom: -60px;
+	}
+
+	.social-icons {
+		display: flex;
+		justify-content: center;
+		float: none;
+		margin-top: 40px;
+		margin-right: -5px;
+	}
+
+}
+
+/*-------------------------------------------------------------------
+Some CSS-code
+------------------------------------------------------------------*/
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+}
+
+.row {
+    margin: 0px;
+}
+
+body > .container {
+    padding: 60px 15px 0;
+}
+
+.container-fluid {
+    width: 100%;
+    padding: 0;
+    margin-top: 10px;
+}
+
+footer .container-fluid {
+    margin-top: 0;
+}
+
+.container .text-muted {
+    margin: 20px 0;
+}
+
+.progress {
+    background: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+}
+
+.pror-bor-black {
+    border: 1px dotted rgba(0, 0, 0, 1);
+}
+
+.pror-bor-gey {
+    border: 1px dotted rgba(0, 0, 0, 1);
+}
+
+.pror-bor-red {
+    border: 1px solid #d9534f
+}
+
+.progress-bar-black {
+    background-color: #e8cec4;
+}
+
+.progress-bar-gey {
+    background-color: #e8e8ea;
+}
+
+.glyphicon {
+    vertical-align: middle;
+    line-height: 17px;
+    min-height: 20px;
+    font-size: 10px;
+    margin-right: 1px;
+}
+
+.glyphicon-resize-full {
+    margin-right: 3px;
+}
+
+i.glyphicon-map-marker {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.bs-docs-section .h1,
+.bs-docs-section .h2,
+.bs-docs-section .h3,
+.bs-docs-section h1,
+.bs-docs-section h2,
+.bs-docs-section h3 {
+    margin-top: 30px;
+}
+
+.bs-docs-section .h4,
+.bs-docs-section .h5,
+.bs-docs-section .h6,
+.bs-docs-section h4,
+.bs-docs-section h5,
+.bs-docs-section h6 {
+    margin-top: 20px;
+}
+
+#topMenu {
+    height: 30px;
+    width:82%;
+} 
+#topMenu ul li {
+    list-style: none;
+    color: black;
+    background-color: #fff;
+    float: left;
+    line-height: 40px;
+    /*vertical-align: middle;*/
+    text-align: center;
+} 
+#topMenu .menuLink {
+    text-decoration:none;
+    color: black;
+    display: block;
+    width: 140px;
+    font-size: 12px;
+    font-weight: bold;
+    transition: .3s;
+}
+#topMenu .menuLink:hover, .menuLink:focus { 
+    color: #000; 
+    background-color: #e8cec4;
+}
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    /*border: 1px dotted #ccc;*/
+    background-color: #e8e8ea;
+    font-size:14px;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #d1d1d1;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #e8cec4;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+/* line 2, /usr/local/rvm/gems/ruby-2.3.4/gems/simple_calendar-2.2.6/app/assets/stylesheets/simple_calendar.scss */
+.simple-calendar table {
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid #dddddd;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  max-width: 100%;
+  width: 100%;
+}
+/* line 13, /usr/local/rvm/gems/ruby-2.3.4/gems/simple_calendar-2.2.6/app/assets/stylesheets/simple_calendar.scss */
+.simple-calendar tr {
+  border-collapse: collapse;
+}
+/* line 17, /usr/local/rvm/gems/ruby-2.3.4/gems/simple_calendar-2.2.6/app/assets/stylesheets/simple_calendar.scss */
+.simple-calendar th {
+  padding: 6px;
+  border-bottom: 2px solid #dddddd;
+  border-collapse: collapse;
+  border-left: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-top: 0px none #333333;
+  box-sizing: border-box;
+  text-align: left;
+}
+/* line 28, /usr/local/rvm/gems/ruby-2.3.4/gems/simple_calendar-2.2.6/app/assets/stylesheets/simple_calendar.scss */
+.simple-calendar td {
+  padding: 6px;
+  vertical-align: top;
+  width: 14%;
+  border: 1px solid #ddd;
+  border-top-color: #dddddd;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-right-color: #dddddd;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-bottom-color: #dddddd;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-left-color: #dddddd;
+  border-left-style: solid;
+  border-left-width: 1px;
+}
+/* line 48, /usr/local/rvm/gems/ruby-2.3.4/gems/simple_calendar-2.2.6/app/assets/stylesheets/simple_calendar.scss */
+.simple-calendar .day {
+  height: 80px;
+}
+/* line 60, /usr/local/rvm/gems/ruby-2.3.4/gems/simple_calendar-2.2.6/app/assets/stylesheets/simple_calendar.scss */
+.simple-calendar .today {
+  background-color: #e8cec4;
+}
+/* line 69, /usr/local/rvm/gems/ruby-2.3.4/gems/simple_calendar-2.2.6/app/assets/stylesheets/simple_calendar.scss */
+.simple-calendar .prev-month {
+  background: #DDD;
+}
+/* line 72, /usr/local/rvm/gems/ruby-2.3.4/gems/simple_calendar-2.2.6/app/assets/stylesheets/simple_calendar.scss */
+.simple-calendar .next-month {
+  background: #DDD;
+}
+
+.has-events div {
+  background: #e8cec4;
+  /*font-weight:bold;*/
+}
+.calendar-heading {
+    text-align:center;
+    font-size:15px;
+    font-weight:bold;
+    margin-bottom:15px;
+    color: #ad5364;
+}
+/*.cbp-l-grid-projects-title a {*/
+/*    text-decoration:underline;*/
+/*}*/
+.deco a {
+    text_decoration:none;
+}

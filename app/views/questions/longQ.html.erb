@@ -1,0 +1,110 @@
+<div class="container">
+<h1>주관식풀기</h1>
+  <ul class="nav nav-tabs nav-justified">
+    <!-- 사용자가 과목을 늘릴때마다 탭이 생김 -->
+    <div class="tab">
+      <% @subjects.each do |s| %>
+        <%if s.id==@subject_id.to_i %>
+          <a href="/subjects/subject_list/<%= s.id %>" style="color:black; font-weight:bold"><button class="tablinks active"><%= s.sub_name%></button></a>
+        <%else%>
+          <a href="/subjects/subject_list/<%= s.id %>" style="color:black"><button class="tablinks"><%= s.sub_name%></button></a>
+        <%end%>
+      <% end %> <!-- subject for문 끝 -->
+    </div>
+  </ul>
+<h1><%= @len3 %></h1>
+<%= @split %>
+<%= @con %>
+<br>
+
+lcontent_q : <%#= @lcontent_q[0].long_content_q %><br>
+lcontent_a : <%#= @lcontent_a[0].long_content_a %><br>
+
+<hr>
+
+<% @index = 0 %>
+
+<% for i in 0..@lcontent.length-1 %>
+  <h1>"<%=@lcontent[i].title%>"에 관한 문제입니다.</h1>
+
+  <% (0..@lcontent[i].long_content_q.size-1).each do |j| %>
+  
+    <div class="row justify-content-center">
+        <h4><%=j+1%>번. <%= @lcontent[i].long_content_q[j] %>?</h4>
+    </div>
+    
+    <input type="text" class="form-control" id="input<%=@index%>" name="answer" value="<%=@lcontent[i].long_content_a[j]%>">
+    <%@index=@index+1%>
+  <% end %>
+
+  <hr>
+<% end %>
+
+  
+  <hr>
+<!--Button trigger modal -->
+<button type="button" onclick="check_rslt_long();" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myModal" >정답 확인</button>
+  
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        
+        각각 정답체크 / <br>
+        <%for i in 0..@index-1%>
+          <%=i+1%>번 : <p id="user_answer<%=i%>"></p>
+        <% end %>
+        전체 정답체크 /
+        
+        <p id="user_answer"></p>
+          
+        <script>
+              function check_rslt_long(){
+                  var user_ans=[];
+                  var ans=[];
+                  var ocheck = 0;
+                  var xcheck = 0;
+                  
+                  <% x = 0 %>
+                  <% for j in 0..@lcontent.length-1 %>
+                    user_ans[<%=j%>] = [];
+                    <% for k in 0..@lcontent[j].long_content_q.size-1 %>
+                      user_ans[<%=j%>][<%=k%>] = $('#input<%=x%>').val();
+                      <% x = x+1 %> 
+                    <% end %>
+                  <% end %>
+                  
+                  <% y = 0 %>
+                  <% for j in 0..@lcontent.length-1 %>
+                    ans[<%=j%>] = [];
+                    	<% for k in 0..@lcontent[j].long_content_q.size-1 %>
+                    		ans[<%=j%>][<%=k%>] = "<%=@lcontent[j].long_content_a[k]%>"
+                    		
+                    		if (user_ans[<%=j%>][<%=k%>] == ans[<%=j%>][<%=k%>]) {
+                    		  ocheck++;
+                    		  document.getElementById("user_answer<%=y%>").innerHTML = "정답";
+                    		}
+                    		else {
+                    		  xcheck++;
+                    		  document.getElementById("user_answer<%=y%>").innerHTML = "오답";
+                    		}
+                    		<% y = y+1 %>
+                    	<% end %>
+                  <% end %>
+                }
+        </script>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">이제 그만</button>
+        <button type="button" class="btn btn-primary"><a href="shortQ">다음 문제</a></button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

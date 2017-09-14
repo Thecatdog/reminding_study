@@ -1,0 +1,55 @@
+<head>
+  <style>
+    .btn-sched{
+      color: #fff;
+      background-color: #e6a394;
+      border-color: #fff;
+      display: inline-block;
+      padding: 6px 12px;
+      margin-bottom: 0;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.42857143;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      background-image: none;
+      border: 1px solid transparent;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body style="background:#f4f4f4">
+  <div class="container" style="width:90%; background:#fff">
+    <p id="notice"><%= notice %></p>
+  
+    <center><h2>Study Planner</h2></center>
+    <center>
+      <p>스터디 플래너입니다<br> 일정을 추가하고 싶으시면, New Study를 눌러주세요!</p>
+    </center>
+    <br>
+    
+    <button type="button" class="btn-sched" style="float:right;"><%= link_to 'New Study', new_meeting_path %></button>
+    <br><br>
+    
+    <%= month_calendar events: @meetings do |date, meetings| %>
+     <%= date.day %>
+      <% meetings.each do |meeting| %>
+        <div>
+          <%= meeting.name %>
+          <%= link_to 'Edit', edit_meeting_path(meeting) %>
+          <%= link_to 'Destroy', meeting, method: :delete, data: { confirm: "Are you sure?" } %>
+        </div>
+      <% end %>
+    <% end %>
+  
+  </div>
+</body>

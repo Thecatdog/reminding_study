@@ -1,0 +1,47 @@
+
+<body>
+  <div class="container" style="width:70%;background:#fff" >
+    
+        <table class="table table-sm" >
+          <thead>
+            <tr>
+              <th width="20%" colspan="2"><h3><%= @content.title %></h3></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-size:14px">
+              <td width="20%"><strong><%=@one_subject.sub_name%></strong></td>
+              <td align="right">작성일　<%= @content.created_at.in_time_zone("Asia/Seoul").strftime("%F %T") %></td>
+            </tr>
+            <tr>
+              <td colspan="2"><blockquote style="font-size:13px"><%= @content.all_content.html_safe %></blockquote></td>
+            </tr>
+            <!--<tr align="left">-->
+            <!--  <td>all content</td>-->
+            <!--  <td><%#= @content.all_content %></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--  <td>short_content</td>-->
+            <!--  <td><%#= @content.short_content %></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--  <td>long_content_q</td>-->
+            <!--  <td><%#= @content.long_content_q %></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--  <td>long_content_a</td>-->
+            <!--  <td><%#= @content.long_content_a %></td>-->
+            <!--</tr>-->
+          </tbody>
+        </table>
+        <div>
+          <div class="btn-group pull-right"style="margin-bottom:10px" >
+          <a href="/detail/edit/<%=@content.subject_id%>/<%= @content.id %>" role="button" class="btn btn-primary" style="font-size:12px">수정</a>
+          <a href="/detail/delete/<%= @content.id %>" role="button" class="btn btn-primary"style="font-size:12px" >삭제</span>
+      </a>
+          <a href="/subjects/subject_list/<%=@content.subject_id%>" role="button" class="btn btn-primary" style="font-size:12px">리스트로</a>
+          </div>
+        </div>
+    </div>
+  <hr>  
+</body>

@@ -1,0 +1,35 @@
+<body style="background:#f4f4f4">
+    <form action="/user/update/<%= current_user.id %>" method="post">
+        <div class="container-fluid" style="width:90%; background:#fff">
+            
+            <div class="portfolio-content col-md-10 col-md-offset-1">
+            <!--마이페이지사진-->
+                <div class="row" style="margin:30pt;">
+                    
+                    <div class="cbp-l-project-container pull-left" style="padding-left:3%">
+                       
+                    </div>
+                    <h1 align="center">회원정보 수정</h1>
+                    <div class="cbp-l-project-desc pull-right" style="padding-top:10%">
+                    <!--List-->
+
+                        <ul class="cbp-l-project-details-list" style="margin-left:-250px">
+                            <li><strong>Name</strong>
+                            <input type="string" name="name" value="<%= current_user.name %>" style="width:80%; border:0px; background-color:#f4f4f4; margin-bottom:5px;padding-left:10px"></li>
+                            <li><strong>Email</strong>
+                            <input type="email" name="email" value="<%=current_user.email%>" style="width:80%;border:0px;background-color:#f4f4f4; margin-bottom:5px;padding-left:10px"></li>
+                            <li><strong>school</strong>
+                            <input type="string" name="school" value="<%=current_user.school%>" style="width:80%;border:0px;background-color:#f4f4f4; margin-bottom:5px;padding-left:10px"></li>
+                            <li><strong>major</strong>
+                            <input type="string" name="major" value="<%=current_user.major%>" style="width:80%;border:0px;background-color:#f4f4f4; margin-bottom:5px;padding-left:10px"></li>
+                        </ul>
+                        <!--/List-->
+                        <button type="submit" class="btn btn-outline-secondary" style="float:right;margin-right:45px;margin-top:5px">수정하기</button>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+         
+    </form>
+</body>

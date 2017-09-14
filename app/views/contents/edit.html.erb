@@ -1,0 +1,54 @@
+<html>    
+    <head>
+    </head>
+    
+    <body>
+        <div class="container" style="width:70%;background:#fff">
+            <form action="/contents/update/<%=@one_subject.id%>/<%= @content.id %>" method="post" class="form-horizontal"  >
+          
+            <div class="cbp-l-project-details-title">
+                <h2>[ <%=@one_subject.sub_name%> ] 내용정리 수정</h2>
+            </div>
+                
+            <table class="table">
+                <tr>
+                    <td width="10%" align="center" style="padding-left:5%">
+                        <label for="content" class="control-label" style="align:left">TITLE</label>
+                    </td>
+                    <td align="center">
+                        <input type="text" class="form-control" id="example-text-input" name="title" value="<%=@content.title%>" placeholder="제목" align="center"style="width:700px">
+                    </td>
+                </tr>
+                <tr>
+                    <div class="container">
+                        빈칸 문제를 위한 단어는 <strong>Bold</strong>, <br>
+                        주관식 문제를 위한 단어와 개념은 <span style="text-decoration: underline;" data-mce-style="text-decoration: underline;">Underline</span> 표시를 해주세요.
+                    </div>
+                </tr>   
+                <tr>
+                    <td colspan="2">
+                        <div class="form-group" align="center" style="margin-top:10px; margin-bottom:-10px">
+                            <%= tinymce %>
+                            <textarea id="all_content" name="all_content" class="tinymce" col="10"><%=@content.all_content%></textarea>
+                            <br>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center " style="margin-bottom:10px">
+                        <a href="/contents/detail/<%=@one_subject.id%>" class="btn btn-primary">리스트로</a>
+                        <button type="submit" class="btn btn-primary">저장하기</button>
+                    </td>
+                </tr>
+            </table>
+            
+            </form>
+
+        </div>
+    </body>
+</html>
+
+<script>
+    
+</script>
+

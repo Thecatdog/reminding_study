@@ -1,0 +1,54 @@
+<body>
+  <div class="container" align="center">
+    <div class="panel panel-default" style="width:70%">
+      <div class="panel-heading">
+        <h1><%= @subjects.find(@subject_id).sub_name %> 문제풀이</h1>
+        <h5 style="margin-top:-10px"><%= @contents_num %>주제가 선택되었습니다.</h5>
+      </div>
+      <div class="panel-body" style="height:100px">
+        <h3>문제 풀이 방법을 선택하십시오.</h3>
+      </div>
+      
+      <div class="panel-footer" style="height:250px">
+        <!-- 사용자가 주관식만 만들었으면, 주관식 버튼만 -->
+        <!-- 객관식 버튼만 만들었으면, 객관식 버튼만 -->
+        
+        <% @split.each do |i| %>
+          
+          <%# if Content.find(i).long_content_q != nil? %>
+            <!--주관식 버튼-->
+            <%# break if Content.find(i).long_content_q != nil? %>
+            <button class="btn btn-outline-secondary" onclick="to_longQ(); return false" style="width:130px;height:100px; margin-top:50px;margin-right:30px;font-weight:bold;font-size:20px">주관식</button>
+          <%# end %>
+        <% end %>
+
+          <!--빈칸 버튼-->
+            <button class="btn btn-outline-secondary" onclick="to_shortQ(); return false" style="width:130px;height:100px;margin-top:50px;margin-left:30px;font-weight:bold;font-size:20px">빈칸채우기</button>
+
+      </div>
+    </div>
+  </div>
+  
+  <form name="form2" method="post">
+    <input type="hidden" name="len2" value="">
+  </form>
+
+  <script type="text/javascript"></script>
+  <script>
+    function to_longQ()
+    {
+        var lst = "<%= @contents_num %>";
+        document.form2.len2.value = lst;
+        document.form2.action="/<%= @subject_id %>/questions/longQ";
+        document.form2.submit();
+    };
+  
+    function to_shortQ()
+    {
+        var lst = "<%= @contents_num %>";
+        document.form2.len2.value = lst;
+        document.form2.action="/<%= @subject_id %>/questions/shortQ";
+        document.form2.submit();
+    };
+  </script>
+</body>

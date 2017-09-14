@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Remind Study</title>
+  <%= csrf_meta_tags %>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Neuer is a responsive portfolio template for creative people.">
+  <meta name="author" content="ThemeBang">
+  <meta name="designer" content="ThemeBang">
+  <meta name="reply-to" content="themebang@gmail.com">
+  <meta name="copyright" content="(c) 2017 ThemeBang - www.themebang.com">
+  <meta name="robots" content="index, follow">
+
+  <!--Verifitication-->
+  <meta name="google-site-verification" content="">
+  <meta name="alexaVerifyID" content="">
+  <meta name="yandex-verification" content="">
+  <meta name="msvalidate.01" content="">
+  <%= stylesheet_link_tag 'application', medis: 'all' %>
+  <!-- / Verifitication-->
+  
+  <link rel="shortcut icon" href="contents/images/icons/favicon.png">
+  <link rel="canonical" href="http://www.domainname.com/">
+  
+  <!-- CSS -->
+  <link href="app/assets/stylesheets/fonts.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300i,700" rel="stylesheet" type="text/css">
+  <link href="app/assets/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="app/assets/stylesheets/hover-min.css" rel="stylesheet" type="text/css">
+  <link href="app/assets/stylesheets/cubeportfolio.css" rel="stylesheet" type="text/css">
+  <link href="app/assets/stylesheets/portfolio.min.css" rel="stylesheet" type="text/css">
+  <link href="app/assets/stylesheets/customize.css" rel="stylesheet" type="text/css">
+
+  <!-- Font Awesome -->
+  <script src="https://use.fontawesome.com/e9965a82bb.js"></script>
+  
+  <style>
+    .banner {
+      background-image:url(<%= image_path 'study.png' %>);
+      background-size:35%;
+      background-repeat:repeat;
+      background-position:center;
+      margin-top:10px;
+      height:230px;
+
+  }
+  #topMenu ul li {
+    list-style: none;
+    color: black;
+    background-color: #fff;
+    float: left;
+    opacity: 0.74;
+    line-height: 40px;
+    text-align: center;
+}
+  </style>
+</head>
+
+<body>
+  <!-- fixed nav bar -->
+  <% if user_signed_in? %>
+    <!--Menu-->
+      <div class="navbar navbar-toggleable-md navbar-light bg-faded w3-display-middle w3-large " >
+        <div class="banner">
+        <div class="list-group cbp-l-filters-button js-filters-juicy-projects">
+            <div class="cbp-filter-item list-group-item logo" align="center">
+              <a href="/"><img src="<%= image_path 'logo12.png' %>" alt="img" /></a>
+            </div>
+            <div class="container" align="center">
+              <nav id="topMenu">
+                <ul>
+                  <li><strong class="menuLink" style="color:#000"> <%=current_user.name%> </strong></li>
+                  <li>|</li>
+                  <li><a href="/user/info"><span class="menuLink" style="color:#000"> About </span></a></li>
+                  <li>|</li>
+                  <li>
+                    <% if @subjects.count < 1 %>
+                      <span class="menuLink" style="color:#000;"> 과목을 추가해주세요! </span>
+                    <% else %>
+                      <a href="/subjects/subject_list/<%= @subjects.first.id %>" class="menuLink" > 공부하러=3 </a>
+                    <% end %>
+                  </li>
+                  <li>|</li>
+                  <li><a href="/<%= current_user.id%>/diary" class="menuLink" method="post"> MY DIARY </a></li>
+                  <li>| </li>
+                  <li><span class="menuLink" style="color:#000"> Today is <%= Time.now.strftime("%y.%m.%d ")%></span></li>
+                  <li>| </li>
+                  <li><span class="menuLink" style="color:#000"> <%= button_to "logout", destroy_user_session_path, method: :delete, data: {confirm: "Are you sure?"}, style: "color:black; background:#fff; border:0px;height:40px ;vertical-align: middle", class:"menuLink" %> </span></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Menu-->
+        
+        <!--footer -->
+        <footer class="footer" style="background-color:#e8e8ea; height:45pt;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="hidden-xs col-sm-3 col-md-4">
+                        <small class="footer-small">2017 © &nbsp;TEAM REMINDING</small>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+        <!-- /footer -->
+    <% end %>
+
+    <%= yield %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <!--edit form-->
+    <link href="app/assets/stylesheets/jquery.cleditor.css" rel="stylesheet" type="text/css">
+    <script src="app/assets/javascripts/jquery.cleditor.js" type="text/javascript"></script>
+    <script src="app/assets/javascripts/jquery.cleditor.min.js" type="text/javascript"></script>
+     <script>
+    //     $(document).ready(function () { $("#input").cleditor(); });
+    // </script>
+  
+    <!-- jQuery -->
+    <script src="app/assets/javascripts/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="app/assets/javascripts/bootstrap.min.js" type="text/javascript"></script>
+    <script src="app/assets/javascripts/jquery.cubeportfolio.js" type="text/javascript"></script>
+    <script src="app/assets/javascripts/portfolio-1.js" type="text/javascript"></script>
+    <script src="app/assets/javascripts/retina.min.js" type="text/javascript"></script>
+    <script src="app/assets/javascripts/main.js" type="text/javascript"></script>
+  
+</body>
+</html>

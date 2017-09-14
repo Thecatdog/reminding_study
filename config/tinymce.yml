@@ -1,0 +1,8 @@
+
+toolbar: undo redo | forecolor | bold italic | bullist | alignleft aligncenter alignright
+plugins:
+  - textcolor
+  - lists
+ 
+width: 800
+height: 300

@@ -1,0 +1,36 @@
+<%= form_for(@meeting) do |f| %>
+  <!-- 에러처리 -->
+  <% if @meeting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
+      <ul>
+        <% @meeting.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <!-- /에러처리 -->
+  
+  <body style="background:#f4f4f4">
+      <div class="container-fluid" style="width:90%; background:#fff">
+          <div class="portfolio-content col-md-10 col-md-offset-1">
+              <div class="row" style="margin:10pt;">
+                  
+                    <div class="cbp-l-project-desc pull-right" style="padding-top:20pt">
+                      <p style="float:right;"><%= link_to 'Back', meetings_path %></p>
+                      <ul class="cbp-l-project-details-list" style="margin-left:-250px">
+                        <li><strong>Subject</strong>
+                        <%= f.select :name, @subjects.pluck(:sub_name) %></li>
+                        <li><strong>Start Time</strong>
+                        <%= f.datetime_select :start_time %></li>
+                        <li><strong>End Time</strong>
+                        <%= f.datetime_select :end_time %></li>
+                      </ul>
+                      <button type="submit" class="btn btn-outline-secondary" style="float:right;">저장하기</button>      
+                  </div>
+              </div>
+        </div>
+      </div>
+  </body>
+<% end %>

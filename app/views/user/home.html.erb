@@ -1,0 +1,307 @@
+<html lang="en">
+    <head>
+        <style>
+          .modal-header, h4, .close {
+              background-color: #d5aa97;
+              color:black !important;
+              text-align: center;
+          }
+          .modal-footer {
+              background-color: #e8e8ea;
+          }
+          #user_edit{
+              float: right;
+              text-decoration:none;
+              background-color:#ffffff;
+              color:black;
+          }
+          .btn2 {
+                background-image: none;
+    outline: 0;
+    color: #D5D5D5;
+    background: #4d4d4d;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125)
+            }
+ 
+          </style>
+    </head>
+    <body style="background:#f4f4f4">
+        <div class="container-fluid" style="width:90%; background:#fff">
+            <!--fixed nav bar from application.html.erb -->
+            
+            <div class="portfolio-content col-md-10 col-md-offset-1">
+            <!--마이페이지사진-->
+            <div class="row">
+                <div class="cbp-l-project-container pull-left" style="padding-left:3%">
+                    <div class="cbp-l-project-title"><%= current_user.name%></div>
+                    <div class="cbp-l-project-subtitle"><%=current_user.school%>의 학생</div>
+                    <img src="<%= image_path 'john-doe.jpg' %>" class="center-block img-rounded" alt="John Doe" width="180" />
+                </div>
+                <div class="cbp-l-project-desc pull-right" style="padding-top:10%">
+                    <div class="cbp-l-project-details-title">
+                        <span>I AM</span>
+                        <a id="user_edit" href="/user/edit/:user_id"><span>UPDATE</span></a>
+                    </div>
+                    <!--List-->
+                    <ul class="cbp-l-project-details-list ">
+                        <li><strong>Name</strong><%=current_user.name%></li>
+                        <li><strong>Email</strong><%=current_user.email%></li>
+                        <li><strong>school</strong><%=current_user.school%></li>
+                        <li><strong>major</strong><%=current_user.major%></li>
+                    </ul>
+                    <!--/List-->
+                </div>
+            </div>
+                
+            <!--/Project Details-->
+            <!--/마이페이지사진-->
+                <!--과목-->
+                    <div class="cbp-l-project-container col-md-12">
+                        <!--Title-->
+                        <div class="cbp-l-project-desc-title">
+                            <span>SUBJECT</span>
+                        </div>
+                        <!--/Title-->
+                        <div class="portfolio-content portfolio-1">
+                        <!--portfolio Grid-->
+                        <!--Text-->
+                        <div id="js-grid-juicy-projects" class="cbp">
+                         <!--ADDSUBJECT-->
+                        <div class="cbp-item movie" >
+                            <div class="cbp-item-wrap" >
+                                <div class="cbp-caption">
+                                    <div class="cbp-caption-defaultWrap">
+                                        <img src="<%= image_path '10.png' %>" alt="img3">
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="cbp-l-caption-alignCenter">
+                                            <div class="cbp-l-caption-body">
+                                                <a type="button" class="btn" data-toggle="modal" data-target="#newModal">
+                                                  과목추가하기
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cbp-l-grid-projects-title uppercase text-center uppercase text-center">ADD SUBJECT</div>
+                                <div class="cbp-l-grid-projects-desc uppercase text-center uppercase text-center">+</div>
+                                <div class="progress pror-bor-black">
+                                    <div class="progress-bar progress-bar-black" role="progressbar" aria-valuenow="80" aria-valuemin="100" aria-valuemax="0" style="width: 0%"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--/ADDSUBJECT-->
+                        
+                        <% if @content_count >= 1 %>
+                        <!-- 한 과목이라도 있으면 -->
+                            <% @subjects.each do |s|%>
+                            <%if s.id%2==0 %>
+                            <!--과목-->
+                            <div class="cbp-item movie">
+                                <div class="cbp-item-wrap" >
+                                    <div class="cbp-caption">
+                                        <div class="cbp-caption-defaultWrap">
+                                            <img src="<%= image_path '20.png' %>" alt="img3"> </div>
+                                        <div class="cbp-caption-activeWrap">
+                                            <div class="cbp-l-caption-alignCenter">
+                                                <div class="cbp-l-caption-body">
+                                                    <div class="btn-group">
+                                                        <a href="subjects/subject_list/<%=s.id%>" class="btn text-lowercase">문제풀러가기</a>
+                                                        <a href="subjects/subject_delete/<%=s.id%>" class=" btn btn-sm text-lowercase btn-right" method="post">삭제하기</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cbp-l-grid-projects-title uppercase text-center uppercase text-center">
+                                        <a onclick="edit_sub(<%=s.id%>)"><%=s.sub_name%></a>
+                                    </div>
+                                    <div class="cbp-l-grid-projects-desc uppercase text-center uppercase text-center"><%=s.dday%></div>
+                                    <div class="progress pror-bor-gey">
+                                        
+                                    <!-- 퍼센트구하기 -->
+                                    <% @all = Study.where(subject_id: s.id).first.all_count %>
+                                    <% @all = @all + @all %>
+                                    
+                                    <% if FailQuestion.where(subject_id: s.id).first.f_q_content.split(',').count != nil %>
+                                        <% @fail = FailQuestion.where(subject_id: s.id).first.f_q_content.split(',').count %>
+                                    <% end %>
+                                    
+                                    <% if @all == 0 %>
+                                        <% @progressValue = 0 %>
+                                    <% else %>
+                                        <% @progressValue = (@fail.to_f / @all.to_f) * 100 %>
+                                        <% @progressValue = @progressValue.round %>
+                                    <% end %>
+                                    
+                                    <%= @all %>
+                                    <%= @fail %>
+                                    <%= @progressValue %>
+                                    <!-- /퍼센트 구하기 -->
+                                    <div class="progress-bar progress-bar-gey" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%= @progressValue %> %">
+                                        <%#= @progressValue %>
+                                    </div>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/과목-->
+                            <%else%>
+                            <!--과목-->
+                            <div class="cbp-item movie" >
+                                <div class="cbp-item-wrap" >
+                                    <div class="cbp-caption">
+                                        <div class="cbp-caption-defaultWrap">
+                                            <img src="<%= image_path '30.png' %>" alt="img3" > </div>
+                                        <div class="cbp-caption-activeWrap">
+                                            <div class="cbp-l-caption-alignCenter">
+                                                <div class="cbp-l-caption-body">
+                                                    <div class="btn-group">
+                                                        <a href="subjects/subject_list/<%=s.id%>" class="btn text-lowercase">문제풀러가기</a>
+                                                        <a href="subjects/subject_delete/<%=s.id%>" class=" btn btn-sm text-lowercase btn-right" method="post">삭제하기</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cbp-l-grid-projects-title uppercase text-center uppercase text-center">
+                                        <a onclick="edit_sub(<%=s.id%>)"><%=s.sub_name%></a>
+                                    </div>
+                                    <div class="cbp-l-grid-projects-desc uppercase text-center uppercase text-center"><%=s.dday%></div>
+                                    <div class="progress pror-bor-black">
+                                    
+                                    <!-- 퍼센트구하기 -->
+                                        <% @all = Study.where(subject_id: s.id).first.all_count %>
+                                        <% @all = @all+ @all%>
+                           
+                                        <% if @all == 0 %>
+                                            <% @fail = 0 %>
+                                            <% @progressValue = 0 %>
+                                        <% else %>
+                                            <% @fail = FailQuestion.where(subject_id: s.id).first.f_q_content.split(',').count %>
+                                            <% @progressValue = (@fail.to_f / @all.to_f) * 100 %>
+                                            <% @progressValue = @progressValue.round %>
+                                        <% end %>
+                   
+                                        <div class="progress-bar progress-bar-black" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%= @progressValue %>%">
+                                            
+                                        </div>
+                                    <!-- /퍼센트 구하기 -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/과목-->
+                            <%end%>
+                        <%end%>
+                    <%end%>
+
+                </div>
+                <!--/Container 3-->
+                <br>
+            </div>
+          </div>
+        </div>
+        <!--footer -->
+        <footer class="footer" style="background-color:#e8e8ea; height:45pt;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="hidden-xs col-sm-3 col-md-4">
+                        <small class="footer-small">2017 © &nbsp;TEAM REMINDING</small>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- /footer -->
+        
+        <!-- new Modal -->
+        <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document" style="margin-top:200px">
+            <div class="modal-content">
+              <div class="modal-header" align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" id="myModalLabel">ADD TO SUBJECT</h2>
+                <h4>추가할 과목에 대한 정보를 작성해주세요</h4>
+                <h5>D-day :: 등록 후 수정 가능</h5>
+              </div>
+              
+            <div class="modal-body">
+                <form action="/subjects/subject_add" method="post">
+                <div class="form-group container" style="width:550px; margin-top:10px">
+                  <label for="inputPassword4">SUBJECT NAME</label>
+                  <input type="text" id="" name="sub_name" class="form-control" aria-describedby="passwordHelpInline">
+                </div>
+                  
+                <div class="form-group container" style="width:550px">
+                  <label for="example-date-input">D-Day</label>
+                  <input class="form-control" name="dday" type="date" value="2017-08-01" id="example-date-input">
+                </div>
+                
+                <% if user_signed_in? %>
+                    <input type="hidden" name="user_id" value=<%=current_user.id%>>
+                <%end%>
+                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"><strong>CLOSE</strong></button>
+                    <button type="submit" class="btn btn-primary" ><strong>ADD</strong></button>
+                </div>
+            </form>
+        </div>
+      </div>
+     </div>
+    <!-- /New Modal -->
+        
+    <!-- Edit Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document" style="margin-top:200px">
+            <div class="modal-content">
+              <div class="modal-header" align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" id="myModalLabel">EDIT TO SUBJECT</h2>
+                <h4>원하시는 과목을 수정 해주세요</h4>
+              </div>
+              <div class="modal-body">
+                
+                <div class="form-group container" style="width:550px; margin-top:10px">
+                  <label for="inputPassword4">SUBJECT NAME</label>
+                  
+                  <form name="form3" method="post">
+                      <input type="string" id="sub_name" name="sub_name" class="form-control" aria-describedby="passwordHelpInline"> 
+                
+                      <label for="example-date-input">D-Day</label>
+                      <input class="form-control" name="date" type="date" value="2017-08-01" id="example-date-input">
+                  </form>
+                  
+                </div>
+
+                <% if user_signed_in? %>
+                <input type="hidden" name="user_id" value=<%=current_user.id%>>
+                <%end%>
+                
+            </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><strong>CLOSE</strong></button>
+                <button type="submit" class="btn btn-primary" id="subject_id" value="" onclick="edit()"><strong>EDIT</strong></button>
+              </div>
+            </div>
+          </div>
+        </div>
+    <!-- /edit modal -->
+
+    </body>
+    <script type="text/javascript">
+
+    function edit_sub(num){
+        var sub_numb = num.toString();
+        $("#subject_id").val(sub_numb);
+        $("#editModal").modal("show");
+    }
+    
+    function edit(){
+      document.form3.action="/subjects/update/"+ $("#subject_id").val();
+      document.form3.submit();
+    }
+</script>
+</html>

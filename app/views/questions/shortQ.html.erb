@@ -1,0 +1,184 @@
+
+<div class="container" style="width:70%">
+  <h1>빈칸채우기</h1>
+  <ul class="nav nav-tabs nav-justified">
+    <!-- 사용자가 과목을 늘릴때마다 탭이 생김 -->
+    <div class="tab">
+      <% @subjects.each do |s| %>
+      <%if s.id==@subject_id.to_i %>
+          <a href="/subjects/subject_list/<%= s.id %>" style="color:black; font-weight:bold"><button class="tablinks active"><%= s.sub_name%></button></a>
+      <%else%>
+          <a href="/subjects/subject_list/<%= s.id %>" style="color:black"><button class="tablinks"><%= s.sub_name%></button></a>
+      <%end%>
+      <% end %> <!-- subject for문 끝 -->
+    </div>
+  </ul>
+
+  <div class="row justify-content-center">
+  </div>
+  <%@index = 0%>
+  <%@content.each_with_index do |c, index|%>
+  <%
+  @real_answer = c.short_content
+  @acontent = c.all_content.dup
+  
+  html_doc = Nokogiri::HTML(@acontent)
+  
+  @acontent=[]
+  if html_doc.css("strong").text.nil?
+      # @content.short_content = params[:short_content]
+  else 
+      (0..(html_doc.css("p").length-1)).each do|j|
+          html_doc_p = html_doc.css("p")[j]
+          html_doc_p_text = html_doc_p.text
+          html_doc_strg = html_doc_p.css("strong")
+          html_doc_rslt=html_doc_p_text
+          c.short_content[j] = []
+          
+          (0..(html_doc_strg.length-1)).each do |i|
+              html_doc_rslt = html_doc_p_text.gsub!(html_doc_strg[i].text, "____________")
+              html_doc_p_text = html_doc_rslt
+              c.short_content[j] << html_doc.css("p")[j].css("strong")[i].text
+          end
+          @acontent << html_doc_rslt
+      end
+  end%>
+  
+  
+  <div class="form-group">
+      <%for j in 0..@real_answer.length-1%>
+      <h4><%= @acontent[j] %></h4>
+        <%for i in 0..@real_answer[j].length-1%>
+          <%= @real_answer[j][i] %>
+          <input type="text" class="form-control" id="<%=index%>_<%=j%>_<%=i%>" name="answer">
+        <%end%>
+        <%if @real_answer[j].length==0%>
+          <%else%>
+            <p id="user_answer<%=index%>_<%=j%>">○</p>
+          <%end%>
+      <%end%>
+    
+    </div>
+    
+
+
+  
+        <!-- Modal -->
+  <button type="button" onclick="check_rslt();" class="btn btn-primary btn-lg pull-right">정답 확인</button>
+  <a href="/subjects/subject_list/<%=@content[0].subject_id%>" role="button" class="btn btn-primary btn-lg pull-right" >리스트로</a>
+
+  <script>
+              function check_rslt(){
+                var length = [];
+
+                <%for j in 0..@real_answer.length-1%>
+                    length[<%=j%>]=0;
+                    <%for i in 0..@real_answer[j].length-1%>
+                      length[<%=j%>]++;
+                    <%end%>
+                <%end%>
+                
+                if(length==1 && <%=index%>==0){
+                  var user_ans = $('#<%=index%>_0_0').val();
+                  var ans = ["<%=@real_answer[0][0] %>"];
+                  var ocheck = 0;
+                  var xcheck = 0;
+                  if(user_ans == ans[0])
+                  {
+                    // return 1;
+                    document.getElementById("user_answer<%=index%>_0").innerHTML = "●";
+                    ocheck++;
+                  }
+                
+                  else
+                  {
+                    // return 0;
+                    document.getElementById("user_answer<%=index%>_0").innerHTML = "X";
+                    xcheck++;
+                  }
+                }
+                else if (length>=1&&<%=index%>==0){
+                  var user_ans=[];
+                  user_ans[0]=[];
+                  var ans=[];
+                  ans[0]=[];
+                  var ocheck = [];
+                  var xcheck = [];
+                  
+                  <%for j in 0..@real_answer.length-1%>
+                    user_ans[<%=j%>]=[];
+                    ans[<%=j%>]=[];
+                    ocheck[<%=j%>]=0;
+                    xcheck[<%=j%>]=0;
+                    <%for i in 0..@real_answer[j].length-1%>
+                      user_ans[<%=j%>][<%=i%>] = $('#<%=index%>_<%=j%>_<%=i%>').val();
+                      ans[<%=j%>][<%=i%>] = "<%=@real_answer[j][i] %>"
+                      if(user_ans[<%=j%>][<%=i%>]==ans[<%=j%>][<%=i%>]){
+                        ocheck[<%=j%>]++;
+                      }
+                      else{
+                        xcheck[<%=j%>]++;
+                      }
+                    <%end%>
+                    if(ocheck[<%=j%>]==length[<%=j%>]){
+                      document.getElementById("user_answer<%=index%>_<%=j%>").innerHTML = "●";
+                        }
+                    else{
+                        document.getElementById("user_answer<%=index%>_<%=j%>").innerHTML = "X";
+                    }
+                  <%end%>
+                  
+                  
+                }
+                
+                else {
+                  
+                  var user_ans=[];
+                  user_ans[0]=[];
+                  var ocheck=[];
+                  var xcheck=[];
+                  <%for k in 0..index%>
+                    ocheck[<%=k%>]=[];
+                    xcheck[<%=k%>]=[];
+                    <%for j in 0..@content[k].short_content.length-1%>
+                      user_ans[<%=j%>]=[];
+                      ocheck[<%=k%>][<%=j%>]=0;
+                      xcheck[<%=k%>][<%=j%>]=0;
+                      <%for i in 0..@content[k].short_content[j].length-1%>
+                        user_ans[<%=j%>][<%=i%>] = $('#<%=k%>_<%=j%>_<%=i%>').val();
+                        var rslt ="<%= @content[k].short_content[j][i]%>";
+                        if(rslt==user_ans[<%=j%>][<%=i%>]){
+                          ocheck[<%=k%>][<%=j%>]++;
+                        }
+                        else{
+                          xcheck[<%=k%>][<%=j%>]++;
+                        }
+                      <%end%>
+                      if(<%=@content[k].short_content[j].length%>==0){
+                        
+                      }
+                      else{
+                        if(ocheck[<%=k%>][<%=j%>]==<%=@content[k].short_content[j].length%>){
+                        document.getElementById("user_answer<%=k%>_<%=j%>").innerHTML = "●";
+                          }
+                      else{
+                        document.getElementById("user_answer<%=k%>_<%=j%>").innerHTML = "X";
+                      }
+                      }
+                      
+                    <%end%>
+                  <%end%>
+                }
+                
+            }
+      </script>
+<%end%>
+  <!--<form class="form-inline" action="/saveA"  >-->
+
+  
+  
+
+
+
+</div>
+

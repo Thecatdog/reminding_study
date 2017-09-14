@@ -1,0 +1,47 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <form action="/subjects/subject_add" method="post">
+      <div class="card text-center">
+        <div class="card">
+          <div class="card-block">
+            <h4 class="card-title"></h4>
+            <h6 class="card-subtitle mb-2 text-muted"></h6>
+            <p class="card-text"></p>
+          </div>
+          <div class="card-block">
+            <h4 class="card-title">추가할 과목에 대한 정보를 작성해주세요</h4>
+            <p class="card-text">D-day는 나중에 수정이 가능합니다.</p>
+               
+            <div class="form-group">
+              <label for="inputPassword4">과목 이름</label>
+              <input type="text" id="" name="sub_name" class="form-control" aria-describedby="passwordHelpInline">
+            </div>
+              
+            <div class="form-group">
+              <label for="example-date-input">D-Day</label>
+              <input class="form-control" name="dday" type="date" value="2017-08-01" id="example-date-input">
+            </div>
+                
+            <button type="submit" class="btn btn-primary btn-sm">Add</button>
+            </div>
+            <% if user_signed_in? %>
+                <input type="hidden" name="user_id" value=<%=current_user.id%>>
+            <%end%>
+
+            <div class="card-footer text-muted">
+              <a href="/content/content_list">back</a>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</body>

@@ -1,0 +1,100 @@
+<html lang="en">
+    <style>
+    </style> 
+    
+    <head>
+        
+    </head>
+    
+    <body>
+      <div class="container" style="width:70%; background:#fff">
+      <!-- Context-->
+      <div class="portfolio-content" >
+        <ul class="nav nav-tabs nav-justified">
+          
+          <!-- 사용자가 과목을 늘릴때마다 탭이 생김 -->
+          <div class="tab">
+            <% @subjects.each do |s| %>
+              <%if s.id == @one_subject.id %>
+                  <a href="/subjects/subject_list/<%= s.id %>" style="color:black; font-weight:bold"><button class="tablinks active"><%= s.sub_name%></button></a>
+              <%else%>
+                  <a href="/subjects/subject_list/<%= s.id %>" style="color:black"><button class="tablinks"><%= s.sub_name%></button></a>
+              <%end%>
+            <% end %> 
+          <!-- subject for문 끝 -->
+          </div>
+        </ul>
+
+        <form action="/questions/choice">
+          <table class="table table-hover" >
+            <thead align="center" style="font-weight:bold">
+              <tr>
+                <td width="20px"></td>
+                <td width="70px">선택</td>
+                <td>주제</td>
+                <td width="100px">날짜</td>
+               
+              </tr>
+            </thead>
+              
+              <!-- 어떤 과목을 선택하는지에 따라 tbody의 내용이 달라짐 -->
+              <tbody align="center">
+                <% @view_content.each_with_index do |c, index| %>
+                  <tr>
+                    <th scope="row"><%= index+1 %></th>
+                    <td ><input type="checkbox" aria-label="Checkbox for following text input" name="chkList" value="<%=c.id%>" id="<%=c.id%>"></td>
+                    <td><a href="/contents/detail/<%= c.id %>" style="color:#000; text-decoration:none"><%= c.title %></a></td>
+                    <td><%= c.created_at.in_time_zone("Asia/Seoul").strftime("%F") %></td>
+                    
+                  </tr>
+                <% end %>
+                
+              </tbody>
+              
+            </table>
+           
+        </form>
+        
+        <div class="pull-right">
+          <a href="/contents/new/<%= @one_subject.id %>"><button type="submit" class="btn btn-secondary">추가하기</button></a>
+          <input type="submit" value="문제풀기" class="btn btn-secondary" onclick="get_chked_values(); return false">
+          <a href="/fail_question/show/<%= @one_subject.id %>"><button type="button" class="btn btn-secondary">오답확인</button></a>
+        </div>
+         
+      </div>
+    </div>
+    
+      <form name="form1" method="post">
+        <input type="hidden" name="len" value="">
+      </form>
+    </body>
+  
+  <!-- 체크 박스 -->
+  <script type="text/javascript">
+  
+    function get_chked_values()
+    {
+      if( $(":checkbox[name='chkList']:checked").length==0 )
+      {
+        alert("항목을 하나이상 체크해주세요.");
+        return;
+      }
+      
+      var chked_val = "";
+      $(":checkbox[name='chkList']:checked").each(function(pi,po)
+      {
+        chked_val += ","+po.value;
+      });
+      
+      if(chked_val!="")chked_val = chked_val.substring(1);
+    
+      document.form1.len.value = chked_val;
+      document.form1.action="/<%= @one_subject.id %>/questions/solv_question";
+      document.form1.submit();
+    }
+    
+  </script>
+
+
+
+</html>

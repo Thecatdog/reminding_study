@@ -1,0 +1,82 @@
+<html>
+  
+<head>
+    <style>
+
+    .table a:link{
+        text-decoration:none; color:#000000;
+    }
+    .table a:hover{
+        text-decoration:none; color:#000000;
+    }
+    .panel {
+    background-color: transparent;
+    }
+    .transparent{    
+    background-color: rgba(213,170,151,0.25);
+    }
+    .bg {
+      background-image:url(<%= image_path 'caught_in_the_middle-wallpaper-3840x2160.jpg' %>);
+      background-repeat:no-repeat;
+      background-size:100%;
+      background-position:center;
+    }
+    .introduction{
+      text-align-last:center;
+    }
+    
+    </style>
+</head>
+
+
+<body class="bg">
+<div class="container" style="padding-top:10%; padding-left:20%; padding-right:20%; padding-bottom:7%">
+  
+  <div class="introduction">
+    <h3>여태까지 혼자 공부하느라 힘드셨죠? </h3>
+    <h5> '내가 제대로 공부를 한건가?' 의문스러우시다면 </h5>
+    <h5> 문제를 직접 만들어서 공부하고싶다면 </h5>
+    <h5> 본인이 암기한 확인해보고싶다면 </h5>
+    <h4> 리마인딩 스터디가 도와드립니다. </h4>
+  </div>
+  
+  <div class="panel panel-default transparent" style=" border:0px">
+      <div class="panel-heading " >
+        
+        <tr class="panel-title transparent">
+          <p style="font-weight:bold; font-size:30px" align="center">LOG IN</p>
+        </tr>
+      </div>
+      <div class="panel-body" style="padding-left:10%; padding-right:10%;">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field">
+          <label class="text-uppercase">email</label><br/>
+          <%= f.email_field :email, autofocus: true ,class: "form-control form-control-lg"%>
+        </div>
+        <p></p>
+        <div class="field">
+          <label class="text-uppercase">passwd</label><br/>
+          <%= f.password_field :password, autocomplete: "off",class: "form-control form-control-lg" %>
+        </div>
+      
+        <% if devise_mapping.rememberable? -%>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end -%>
+      
+        <div class="actions" align="center" >
+          <%= f.submit "log in", class: "btn btn-default", style: "font-weight:bold; font-size:20px" %>
+        </div>
+      <% end %>
+      <br>
+      <div align="center" >
+      <%= render "devise/shared/links" %>
+      </div>
+      </div>
+    </div>
+
+ </div>
+ </body>
+</html>

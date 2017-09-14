@@ -1,0 +1,79 @@
+
+<head>
+    <style>
+    body {
+      background: #ffffff;
+      color:#212121;
+      
+    }
+    .table a:link{
+        text-decoration:none; color:#000000;
+    }
+    .table a:hover{
+        text-decoration:none; color:#000000;
+    }
+    .navbar {
+        background:#F2F2F2;
+    }
+
+    </style>
+</head>
+
+<body>
+
+
+<div class="container" >
+  
+  <div class="panel panel-default" style="margin-left:300px;margin-right:300px;margin-top:50px">
+      <div class="panel-heading" style="background:#F2F2F2">
+        
+        <tr class="panel-title">
+          <p style="font-weight:bold; font-size:20px" align="center">SIGN UP</p>
+        </tr>
+      </div>
+      <div class="panel-body" style="margin-left:30px;margin-right:30px">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+      
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, class: "form-control form-control-lg"%>
+        </div>
+      
+        <div class="field">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "off", class: "form-control form-control-lg" %>
+        </div>
+      
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control form-control-lg" %>
+        </div>
+        <div class="field">
+          <%= f.label :name %><br/>
+          <%= f.text_field :name, autocomplete: "off", class: "form-control form-control-lg" %>
+        </div>
+        <div class="field">
+          <%= f.label :school %><br/>
+          <%= f.text_field :school, autocomplete: "off", class: "form-control form-control-lg" %>
+        </div>
+        <div class="field">
+          <%= f.label :major %><br/>
+          <%= f.text_field :major, autocomplete: "off", class: "form-control form-control-lg" %>
+        </div>
+        <br>
+        <div class="actions" align="center" >
+          <%= f.submit "Sign up" %>
+        </div>
+      <% end %>
+      <div align="center" >
+        <%= render "devise/shared/links" %>
+      </div>
+
+      </div>
+    </div>
+
+</div>

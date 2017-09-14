@@ -1,0 +1,270 @@
+<body style="background:#f4f4f4">
+  <div class="container" style="background:#fff;padding-top: 20px;">
+  <a href="/subjects/subject_list/<%=@content[0].subject_id%>" style="float:right;">리스트로</a>
+  <center><h2 style="color:#31336d;">Practice</h2></center>
+    <center>
+      <p style="color:#31336d;">문제를 풀어봅시다<br> 문제를 다 푸신 후에는 확인 버튼을 눌러주세요!</p>
+  </center>
+  <br>
+  <!--빈칸-->
+  <div class="container" style="width:90%">
+    <br>
+    <%@real_answer = []%>
+    <%@content.each_with_index do |c, index|%>
+    <%
+    
+    @real_answer[index] = c.short_content
+    @acontent = c.all_content.dup
+    
+    html_doc = Nokogiri::HTML(@acontent)
+    @acontent=[]
+    @allcontent=[]
+    if html_doc.css("strong").text.nil?
+    else 
+        (0..(html_doc.css("p").length-1)).each do|j|
+            html_doc_p = html_doc.css("p")[j]
+            html_doc_p_text = html_doc_p.text
+            html_doc_strg = html_doc_p.css("strong")
+            html_doc_rslt=html_doc_p_text
+            c.short_content[j] = []
+            @allcontent << html_doc.css("p")[j].text
+            (0..(html_doc_strg.length-1)).each do |i|
+                html_doc_rslt = html_doc_p_text.gsub!(html_doc_strg[i].text, "____________")
+                html_doc_p_text = html_doc_rslt
+                c.short_content[j] << html_doc.css("p")[j].css("strong")[i].text
+            end
+            @acontent << html_doc_rslt
+        end
+    end
+    %>
+     <br>
+     <%if @real_answer[index].all? &:blank? %>
+    <%else%>
+    <div class="cbp-l-project-desc-title">
+    <span>빈칸풀기</span>
+    </div>
+    <center><h4>"<%=@content_title %>"에 관한 문제입니다.</h4></center>
+    <br>
+    <%end%>
+        <div class="form-group">
+          <%for j in 0..@real_answer[index].length-1%>
+            <%if @acontent[j].include?("_")%>
+              <p style="font-size:17px"><strong><%= @acontent[j] %></strong></p>
+            <%else%>
+            <%end%>
+            
+            <%for i in 0..@real_answer[index][j].length-1%>
+              <%if current_user.email == "admin@email.com"%>
+              <%= @real_answer[index][j][i] %>
+              <%else%>
+              <%end%>
+              <input type="text" class="form-control" id="<%=index%>_<%=j%>_<%=i%>" name="answer">
+            <%end%>
+            <%if @real_answer[index][j].length==0%>
+              <p id="user_answer<%=index%>_<%=j%>"></p>
+            <%else%>
+              <p id="user_answer<%=index%>_<%=j%>">○</p>
+            <%end%>
+          <%end%>
+        </div>
+    
+    <%if @real_answer[index].all? &:blank? %>
+    <%else%>
+    <center>
+      <button id="check_rslt_<%=index%>" type="button" onclick="check_rslt(<%=index%>);" class="btn btn-outline-info" style="
+    margin-bottom: 20px;">정답 확인</button>
+    <button id="send_fail_ans" type="button" onclick="send_fail_ans();" class="btn btn-outline-info" style="
+    margin-bottom: 20px;">빈칸 문제 오답 저장하기</button>
+    </center>
+    
+    <form name="short_fail" method="post">
+            <input type="hidden" name="short_f_content" value="">
+    </form>
+    <%end%>
+    <%end%>
+    <script>
+        var fail_answer = [];
+        function check_rslt(count){
+          var length = [];
+          var real_answer =<%=raw @real_answer%>;
+          var allcontent =<%=raw @allcontent%>;
+          
+          <%for k in 0..@real_answer.length-1%>
+            length[<%=k%>]=0;
+            <%for j in 0..@real_answer[k].length-1%>
+              length[<%=k%>] = length[<%=k%>] + <%=@real_answer[k][j].length%>;
+            <%end%>
+          <%end%>
+          if(length[count]==1){
+            var user_ans = $('#'+count+'_0_0').val();
+            var ans = real_answer[count][0][0];
+            var ocheck = 0;
+            var xcheck = 0;
+            if(user_ans == ans)
+            {
+              document.getElementById("user_answer"+count+"_0").innerHTML = "●";
+              ocheck++;
+            }
+          
+            else
+            {
+              document.getElementById("user_answer"+count+"_0").innerHTML = "X";
+              xcheck++;
+              fail_answer[fail_answer.length]=allcontent[j];
+              
+            }
+          }
+          else if (length[count]>1 ){
+            var user_ans=[];
+            user_ans[0]=[];
+            var ans=[];
+            ans[0]=[];
+            var ocheck = [];
+            var xcheck = [];
+            
+            
+            for(var j=0; j<real_answer[count].length;j++){
+              user_ans[j]=[];
+              ans[j]=[];
+              ocheck[j]=0;
+              xcheck[j]=0;
+              for(var i=0; i<real_answer[count][j].length;i++){
+                user_ans[j][i]=$('#'+count+'_'+j+'_'+i).val();
+                ans[j][i]=real_answer[count][j][i];
+                if(user_ans[j][i]==ans[j][i])
+                {
+                  ocheck[j]++;
+                }
+                else{
+                  xcheck[j]++;
+                }
+              }
+              if(real_answer[count][j]==0){
+                
+              }
+              else if(ocheck[j]==real_answer[count][j].length && real_answer[count][j]!=0){
+                document.getElementById("user_answer"+count+"_"+j).innerHTML = "●";
+                  }
+              else{
+                document.getElementById("user_answer"+count+"_"+j).innerHTML = "X";
+                fail_answer[fail_answer.length]=allcontent[j];
+
+              }
+            }
+  
+        } 
+           
+      }
+      function send_fail_ans(){
+        document.short_fail.short_f_content.value = fail_answer;
+        document.short_fail.action="/<%=@subject_id%>/<%=current_user.id%>/fail_question/add";
+        document.short_fail.submit();
+      }
+  </script>
+    </div>
+  </div>
+  
+  <!--주관식-->
+  <br>
+  <% for i in 0..@lcontent.length-1 %>
+    <% if @lcontent[i].long_content_q.empty? %>
+  
+    <% else %>
+  <div class="container" style="background:#fff;padding-top: 20px;">
+    <br><br>
+    <div class="container" style="width:90%">
+    <div class="cbp-l-project-desc-title">
+      <span>주관식풀기</span>
+    </div>
+    <center><h4>"<%=@lcontent[i].title%>"에 관한 문제입니다.</h4></center>
+  
+      <% @idx = 0 %>
+      
+      <% (0..@lcontent[i].long_content_q.size-1).each do |j| %>
+      
+        <div class="row justify-content-center">
+            <h4><%=j+1%>번. <%= @lcontent[i].long_content_q[j] %>?</h4>
+        </div>
+         <!--value="<%#=@lcontent[i].long_content_a[j]%>"-->
+        <%if current_user.email == "admin@email.com"%>
+          <input type="text" class="form-control" id="input<%=i%>-<%=@idx%>" name="answer" value="<%=@lcontent[i].long_content_a[j]%>" style="width:80%">
+        <% else %>
+          <input type="text" class="form-control" id="input<%=i%>-<%=@idx%>" name="answer" style="width:80%">
+        <% end %>
+        
+        <%@idx=@idx+1%>
+      <% end %>
+    
+    <br><br>
+    <div class="cbp-l-project-desc-title">
+      <center><span>정답확인</span></center>
+    </div>
+
+      <%for m in 0..@idx-1%>
+              <%=i+1%>-<%=m+1%>번 : <p id="user_answer<%=i%>-<%=m%>"></p>
+      <% end %>
+      <br>
+      <!--Button trigger modal -->
+      
+      <center>
+      <button type="button" onclick="check_rslt_long(<%=i%>);" class="btn btn-outline-info" style="
+      margin-bottom: 20px;">정답 확인</button>
+      <button type="button" onclick="send_fail_long_ans();" class="btn btn-outline-info" style="
+      margin-bottom: 20px;">주관식 문제 오답 저장하기</button>
+      </center>
+
+      <br><Br><br><br>
+      </div>  
+
+      <hr>
+    <% end %>
+  
+  <% end %>
+    
+  <form name="long_fail" method="post">
+    <input type="hidden" name="long_f_content" value="">
+  </form>
+  
+  <script>
+    var long_fail_answer = [];
+    
+    function check_rslt_long(){
+        var content_id = arguments[0];
+        var user_ans=[];
+        var ans=[];
+        var long_q=[];
+        var longqlen=[]; // 컨텐츠마다의 롱큐 갯수를 저장
+
+        <% for j in 0..@lcontent.length-1 %>
+          ans[<%=j%>] = [];
+          user_ans[<%=j%>] = [];
+          longqlen[<%=j%>] = 0;
+          long_q[<%=j%>] = [];
+
+          <% for k in 0..@lcontent[j].long_content_q.size-1 %>
+            ans[<%=j%>][<%=k%>] = "<%=@lcontent[j].long_content_a[k]%>"
+            user_ans[<%=j%>][<%=k%>] = $('#input<%=j%>-<%=k%>').val();
+            longqlen[<%=j%>]++;
+            long_q[<%=j%>][<%=k%>] = "<%=@lcontent[j].long_content_q[k]%>";
+          <% end %>
+        <% end %>  
+    
+        for(var k = 0; k < longqlen[content_id]; k++) {
+          if (user_ans[content_id][k]==ans[content_id][k]) {
+            document.getElementById("user_answer"+content_id+"-"+k).innerHTML = "●";
+          }
+          else {
+            document.getElementById("user_answer"+content_id+"-"+k).innerHTML = "X";
+            long_fail_answer[long_fail_answer.length] = "Q. " + long_q[content_id][k] + "?" + " A. " + ans[content_id][k];
+          }
+        }
+      }
+      
+      function send_fail_long_ans(){
+        document.long_fail.long_f_content.value = long_fail_answer;
+        document.long_fail.action="/<%=@subject_id%>/<%=current_user.id%>/fail_question/add";
+        document.long_fail.submit();
+      }
+  </script>
+  </div>
+</body>
