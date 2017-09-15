@@ -12,8 +12,7 @@ gem 'authority'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use sqlite3 as the database for Active Record
-gem 'pg', group: :production
-gem 'rails_12factor', :group => :production
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -50,8 +49,17 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
+  gem 'pg'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'rails_db'
 end
 
+# Production
+group :production do
+  # Rails 12factor
+  # Makes running your Rails app easier. Based on the ideas behind 12factor.net
+  # Needed for support of Asset Pipeline with Heroku
+  # https://github.com/heroku/rails_12factor
+  gem 'rails_12factor'
+end
