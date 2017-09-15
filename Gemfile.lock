@@ -237,7 +237,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.0)
   jquery-rails
-  pg
+  pg (~> 0.20)
   rails (= 4.2.5)
   rails_12factor
   rails_admin
