@@ -122,28 +122,28 @@
                                     <div class="progress pror-bor-gey">
                                         
                                     <!-- 퍼센트구하기 -->
-                                    <% @all = Study.where(subject_id: s.id).first.all_count %>
-                                    <% @all = @all + @all %>
+                                    <%# @all = Study.where(subject_id: s.id).first.all_count %>
+                                    <%# @all = @all + @all %>
                                     
-                                    <% if Study.where(subject_id: s.id).first.all_count != 0 %>
+                                    <%# if Study.where(subject_id: s.id).first.all_count != 0 %>
                                         <%# @fail = FailQuestion.where(subject_id: s.id).first.f_q_content.split(',').count %>
-                                    <% else %>
-                                        <% @fail = 0 %>
+                                    <%# else %>
+                                        <%# @fail = 0 %>
                                         <%# @fail = FailQuestion.where(subject_id: s.id).first.f_q_content.split(',').count %>
-                                    <% end %>
+                                    <%# end %>
                                     
-                                    <% if @all == 0 %>
-                                        <% @progressValue = 0 %>
-                                    <% else %>
-                                        <% @progressValue = (@fail.to_f / @all.to_f) * 100 %>
-                                        <% @progressValue = @progressValue.round %>
-                                    <% end %>
+                                    <%# if @all == 0 %>
+                                        <%# @progressValue = 0 %>
+                                    <%# else %>
+                                        <%# @progressValue = (@fail.to_f / @all.to_f) * 100 %>
+                                        <%# @progressValue = @progressValue.round %>
+                                    <%# end %>
                                     
-                                    <%= @all %>
-                                    <%= @fail %>
-                                    <%= @progressValue %>
+                                    <%#= @all %>
+                                    <%#= @fail %>
+                                    <%#= @progressValue %>
                                     <!-- /퍼센트 구하기 -->
-                                    <div class="progress-bar progress-bar-gey" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%= @progressValue %> %">
+                                    <div class="progress-bar progress-bar-gey" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%#= @progressValue %> %">
                                         <%#= @progressValue %>
                                     </div>
                                     
@@ -176,29 +176,28 @@
                                     <div class="progress pror-bor-black">
                               
                                     <!-- 퍼센트구하기 -->
-                                    <% @all = Study.where(subject_id: s.id).first.all_count %>
-                                    <% @all = @all + @all %>
+                                    <%# @all = Study.where(subject_id: s.id).first.all_count %>
+                                    <%# @all = @all + @all %>
                                     
-                                    <% if Study.where(subject_id: s.id).first.all_count != 0 %>
+                                    <%# if Study.where(subject_id: s.id).first.all_count != 0 %>
                                         <%# @fail = FailQuestion.where(subject_id: s.id).first.f_q_content.split(',').count %>
-                                    <% else %>
-                                        <% @fail = 0 %>
+                                    <%# else %>
+                                        <%# @fail = 0 %>
                                         <%# @fail = FailQuestion.where(subject_id: s.id).first.f_q_content.split(',').count %>
-                                    <% end %>
+                                    <%# end %>
                                     
-                                    <% if @all == 0 %>
-                                        <% @progressValue = 0 %>
-                                    <% else %>
-                                        <% @progressValue = (@fail.to_f / @all.to_f) * 100 %>
-                                        <% @progressValue = @progressValue.round %>
-                                    <% end %>
+                                    <%# if @all == 0 %>
+                                        <%# @progressValue = 0 %>
+                                    <%# else %>
+                                        <%# @progressValue = (@fail.to_f / @all.to_f) * 100 %>
+                                        <%# @progressValue = @progressValue.round %>
+                                    <%# end %>
                                     
-                                    <%= @all %>
-                                    <%= @fail %>
-                                    <%= @progressValue %>
-                                    
-                   
-                                        <div class="progress-bar progress-bar-black" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%= @progressValue %>%">
+                                    <%#= @all %>
+                                    <%#= @fail %>
+                                    <%#= @progressValue %>
+
+                                        <div class="progress-bar progress-bar-black" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%#= @progressValue %>%">
                                             
                                         </div>
                                     <!-- /퍼센트 구하기 -->
