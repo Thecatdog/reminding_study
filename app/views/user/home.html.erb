@@ -125,8 +125,11 @@
                                     <% @all = Study.where(subject_id: s.id).first.all_count %>
                                     <% @all = @all + @all %>
                                     
-                                    <% if FailQuestion.where(subject_id: s.id).first.f_q_content.split(',').count != nil %>
-                                        <% @fail = FailQuestion.where(subject_id: s.id).first.f_q_content.split(',').count %>
+                                    <% if Study.where(subject_id: s.id).first.all_count != 0 %>
+                                        <%# @fail = FailQuestion.where(subject_id: s.id).first.f_q_content.split(',').count %>
+                                    <% else %>
+                                        <% @fail = 0 %>
+                                        <%# @fail = FailQuestion.where(subject_id: s.id).first.f_q_content.split(',').count %>
                                     <% end %>
                                     
                                     <% if @all == 0 %>
@@ -171,19 +174,29 @@
                                     </div>
                                     <div class="cbp-l-grid-projects-desc uppercase text-center uppercase text-center"><%=s.dday%></div>
                                     <div class="progress pror-bor-black">
-                                    
+                              
                                     <!-- 퍼센트구하기 -->
-                                        <% @all = Study.where(subject_id: s.id).first.all_count %>
-                                        <% @all = @all+ @all%>
-                           
-                                        <% if @all == 0 %>
-                                            <% @fail = 0 %>
-                                            <% @progressValue = 0 %>
-                                        <% else %>
-                                            <% @fail = FailQuestion.where(subject_id: s.id).first.f_q_content.split(',').count %>
-                                            <% @progressValue = (@fail.to_f / @all.to_f) * 100 %>
-                                            <% @progressValue = @progressValue.round %>
-                                        <% end %>
+                                    <% @all = Study.where(subject_id: s.id).first.all_count %>
+                                    <% @all = @all + @all %>
+                                    
+                                    <% if Study.where(subject_id: s.id).first.all_count != 0 %>
+                                        <%# @fail = FailQuestion.where(subject_id: s.id).first.f_q_content.split(',').count %>
+                                    <% else %>
+                                        <% @fail = 0 %>
+                                        <%# @fail = FailQuestion.where(subject_id: s.id).first.f_q_content.split(',').count %>
+                                    <% end %>
+                                    
+                                    <% if @all == 0 %>
+                                        <% @progressValue = 0 %>
+                                    <% else %>
+                                        <% @progressValue = (@fail.to_f / @all.to_f) * 100 %>
+                                        <% @progressValue = @progressValue.round %>
+                                    <% end %>
+                                    
+                                    <%= @all %>
+                                    <%= @fail %>
+                                    <%= @progressValue %>
+                                    
                    
                                         <div class="progress-bar progress-bar-black" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%= @progressValue %>%">
                                             

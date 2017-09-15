@@ -185,7 +185,7 @@
         <div class="row justify-content-center">
             <h4><%=j+1%>번. <%= @lcontent[i].long_content_q[j] %>?</h4>
         </div>
-         <!--value="<%#=@lcontent[i].long_content_a[j]%>"-->
+ 
         <%if current_user.email == "admin@email.com"%>
           <input type="text" class="form-control" id="input<%=i%>-<%=@idx%>" name="answer" value="<%=@lcontent[i].long_content_a[j]%>" style="width:80%">
         <% else %>

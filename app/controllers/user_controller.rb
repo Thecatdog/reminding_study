@@ -39,7 +39,9 @@ class UserController < ApplicationController
             @subjects = Subject.joins("INNER JOIN studies ON studies.subject_id = subjects.id AND studies.user_id = '#{current_user.id}'").distinct
         end
          @content_count = @subjects.count
-
+         
+        # @fail_questions = FailQuestion.find(user_id: current_user.id)
+        # @studies = Study.find(user_id: current_user.id)
     end
     
     def info
