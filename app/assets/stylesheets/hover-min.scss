@@ -4907,7 +4907,7 @@
     left: 0;
     background: #fff;
     background: linear-gradient(135deg, #fff 45%, #aaa 50%, #ccc 56%, #fff 80%);
-    filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#ffffff', endColorstr='#000000');
+    -ms-filter: "progid: DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#ffffff', endColorstr='#000000')";
     z-index: 1000;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
     -webkit-transition-duration: .3s;
