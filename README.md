@@ -1,24 +1,69 @@
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+ ```
+
+██████╗ ███████╗███╗   ███╗██╗███╗   ██╗██████╗ ██╗███╗   ██╗ ██████╗     ███████╗████████╗██╗   ██╗██████╗ ██╗   ██╗
+██╔══██╗██╔════╝████╗ ████║██║████╗  ██║██╔══██╗██║████╗  ██║██╔════╝     ██╔════╝╚══██╔══╝██║   ██║██╔══██╗╚██╗ ██╔╝
+██████╔╝█████╗  ██╔████╔██║██║██╔██╗ ██║██║  ██║██║██╔██╗ ██║██║  ███╗    ███████╗   ██║   ██║   ██║██║  ██║ ╚████╔╝ 
+██╔══██╗██╔══╝  ██║╚██╔╝██║██║██║╚██╗██║██║  ██║██║██║╚██╗██║██║   ██║    ╚════██║   ██║   ██║   ██║██║  ██║  ╚██╔╝  
+██║  ██║███████╗██║ ╚═╝ ██║██║██║ ╚████║██████╔╝██║██║ ╚████║╚██████╔╝    ███████║   ██║   ╚██████╔╝██████╔╝   ██║   
+╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═════╝ ╚═╝╚═╝  ╚═══╝ ╚═════╝     ╚══════╝   ╚═╝    ╚═════╝ ╚═════╝    ╚═╝   
+                                                                                                                             
+ ```
+ 
+* README:       https://github.com/Thecatdog/reminding_study
+* Bug Reports:  https://github.com/Thecatdog/reminding_study/issues
+
+## :star2: Description
+
+Reminding Study is for student who takes lots of time for study.
+It will make a pretest based on user's study contents.
+Then Users can be practice conveniently.
+
+## :pencil2: Features
+
+- [x] Parsing for user's study contents.
+- [x] HTML editor for users.
+- [x] Make pretest with blank. (빈칸 문제를 만든다.)
+- [x] Make pretest with Descriptive form (서술형 문제를 만든다.)
+- [ ] Make multiple choice pretest (객관식 문제를 만든다.)
+- [ ] Convert scanned PDF and images into text.(OCR)
+- [x] Show Achievement degree.
+- [ ] Users who take the same courses share pretests with each other.
 
 
-Welcome to your Rails project on Cloud9 IDE!
+## Ruby version 
 
-To get started, just do the following:
+ruby 2.4.1
 
-1. Run the project with the "Run Project" button in the menu bar on top of the IDE.
-2. Preview your new app by clicking on the URL that appears in the Run panel below (https://remind-study-v01--rikalee.c9users.io/).
+## API Reference
 
-Happy coding!
-The Cloud9 IDE team
+* gem install nokogiri
+
+## Requirement
+
+* require 'rubygems'
+* require 'rest-client'
+
+## HOW TO USE
+
+```
 
 
-## Support & Documentation
+```
 
-Visit http://docs.c9.io for support, or to learn more about using Cloud9 IDE. 
-To watch some training videos, visit http://www.youtube.com/user/c9ide
+## FILES
+
+* 
+
+_NOTE_
+
+```
+   
+   
+```
+
+## 📎Deploy with Docker
+
+```
+```
+
