@@ -19,6 +19,13 @@ Reminding Study is for student who takes lots of time for study.
 It will make a pretest based on user's study contents.
 Then Users can be practice conveniently.
 
+공부를 하실때, 아직도 다들 손으로 쓰면서 공부를 하시나요?
+손으로 직접 textbook을 정리하고,
+정리한 내용을 빈칸으로 만들어서 빈칸 시험에 대한 대비를 하거나 || 서술형 문제를 만들어서 서술형 문제를 만드시나요?
+이 모든걸 손으로 직접 하시거나 워드 작업을 이용하기에는 너무 번거로우시지 않으신가요?
+리마인딩스터디는 이 모든걸 애플리케이션으로 제공해줍니다.
+
+
 ## :pencil2: Features
 
 - [x] Parsing for user's study contents.
@@ -43,27 +50,3 @@ ruby 2.4.1
 
 * require 'rubygems'
 * require 'rest-client'
-
-## HOW TO USE
-
-```
-
-
-```
-
-## FILES
-
-* 
-
-_NOTE_
-
-```
-   
-   
-```
-
-## 📎Deploy with Docker
-
-```
-```
-
